@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="conditions">
+        <field name="shippingnew">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MageWorx\ShippingRateByProductAttribute\Model\Config\Source\ShippingCategory</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Shipping Category</item>
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">shippingnew</item>
+                    <item name="source" xsi:type="string">mageworx_shippingrules_rate_form.custom_attributes</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

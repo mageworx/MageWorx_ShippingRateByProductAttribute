@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+Copyright © MageWorx. All rights reserved.
+See LICENSE.txt for license details.
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+    <columns name="mageworx_shippingrules_rates_columns">
+        <column name="shippingnew">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MageWorx\ShippingRateByProductAttribute\Model\Config\Source\ShippingCategory</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Shipping Category</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="editor" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

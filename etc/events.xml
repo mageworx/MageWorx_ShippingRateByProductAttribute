@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- Add Extension Attributes to the Rates Collection -->
+    <event name="mageworx_shippingrules_rate_save_after">
+        <observer
+                name="mageworx_save_shippingnew_attribute"
+                instance="MageWorx\ShippingRateByProductAttribute\Observer\SaveShippingNewRateAttribute"
+        />
+    </event>
+    <event name="rates_collection_render_filters_before">
+        <observer
+                name="mageworx_add_shippingnew_attribute"
+                instance="MageWorx\ShippingRateByProductAttribute\Observer\AddShippingNewToRatesCollection"
+        />
+    </event>
+    <event name="mageworx_suitable_rates_collection_load_before">
+        <observer
+                name="mageworx_filter_rates_by_shippingnew_attribute"
+                instance="MageWorx\ShippingRateByProductAttribute\Observer\FilterRatesCollectionByShippingNewAttribute"
+        />
+    </event>
+    <event name="mageworx_rates_export_collection_join_linked_tables_after">
+        <observer
+                name="mageworx_join_shipping_new_table_to_export_rates_collection"
+                instance="MageWorx\ShippingRateByProductAttribute\Observer\JoinShippingNewTableToExportRatesCollection"
+        />
+    </event>
+    <event name="mageworx_filter_rates_data_before_insert">
+        <observer
+                name="mageworx_remove_shipping_new_before_insert"
+                instance="MageWorx\ShippingRateByProductAttribute\Observer\RemoveShippingNewBeforeInsert"
+        />
+    </event>
+    <event name="mageworx_shippingrules_import_insert_rates">
+        <observer
+                name="mageworx_shippingrules_import_insert_update_shipping_new"
+                instance="MageWorx\ShippingRateByProductAttribute\Observer\InsertUpdateShippingNewDuringImport"
+        />
+    </event>
+</config>
