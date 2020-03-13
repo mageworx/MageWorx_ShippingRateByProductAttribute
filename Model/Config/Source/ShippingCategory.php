@@ -7,24 +7,47 @@
 namespace MageWorx\ShippingRateByProductAttribute\Model\Config\Source;
 
 
+use Magento\Framework\Exception\LocalizedException;
+
 class ShippingCategory extends \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource
 {
+    /**
+     * @var \Magento\Eav\Model\Config
+     */
+    protected $eavConfig;
+
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $logger;
+
+    /**
+     * ShippingCategory constructor.
+     *
+     * @param \Magento\Eav\Model\Config $eavConfig
+     * @param \Psr\Log\LoggerInterface $logger
+     */
+    public function __construct(
+        \Magento\Eav\Model\Config $eavConfig,
+        \Psr\Log\LoggerInterface $logger
+    ) {
+        $this->eavConfig = $eavConfig;
+        $this->logger = $logger;
+    }
 
     /**
      * @inheritDoc
      */
     public function getAllOptions()
     {
-        $this->_options = [
-            ['label' => __('A'), 'value' => '0'],
-            ['label' => __('B'), 'value' => '1'],
-            ['label' => __('C'), 'value' => '2'],
-            ['label' => __('D'), 'value' => '3'],
-            ['label' => __('E'), 'value' => '4'],
-            ['label' => __('F'), 'value' => '5'],
-            ['label' => __('G'), 'value' => '6'],
-            ['label' => __('H'), 'value' => '7'],
-        ];
+        if (empty($this->_options)) {
+            try {
+                $attribute      = $this->eavConfig->getAttribute('catalog_product', 'shippingnew');
+                $this->_options = $attribute->getSource()->getAllOptions();
+            } catch (LocalizedException $localizedException) {
+                $this->logger->critical($localizedException->getLogMessage());
+            }
+        }
 
         return $this->_options;
     }
