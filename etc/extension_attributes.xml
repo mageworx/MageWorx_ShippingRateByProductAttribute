@@ -8,7 +8,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
     <!-- Rate Extension -->
     <extension_attributes for="MageWorx\ShippingRules\Api\Data\RateInterface">
-        <attribute code="shippingnew" type="string">
+        <attribute code="shippingnew" type="int">
             <join reference_table="mageworx_shippingrules_rates_shippingnew" reference_field="rate_id" join_on_field="rate_id">
                 <field>shippingnew</field>
             </join>

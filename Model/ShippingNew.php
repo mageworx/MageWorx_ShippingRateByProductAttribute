@@ -37,7 +37,7 @@ class ShippingNew extends AbstractModel
     protected function _construct()
     {
         parent::_construct();
-        $this->_init('MageWorx\ShippingRateByProductAttribute\Model\ResourceModel\VolumeWeight');
+        $this->_init('MageWorx\ShippingRateByProductAttribute\Model\ResourceModel\ShippingNew');
         $this->setIdFieldName('rate_id');
     }
 }

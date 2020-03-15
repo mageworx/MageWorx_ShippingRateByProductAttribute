@@ -7,24 +7,28 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <!-- Add Extension Attributes to the Rates Collection -->
+    <!-- Save custom attribute value during rate saving -->
     <event name="mageworx_shippingrules_rate_save_after">
         <observer
                 name="mageworx_save_shippingnew_attribute"
                 instance="MageWorx\ShippingRateByProductAttribute\Observer\SaveShippingNewRateAttribute"
         />
     </event>
+    <!-- Add custom attribute value to the rates collection -->
     <event name="rates_collection_render_filters_before">
         <observer
                 name="mageworx_add_shippingnew_attribute"
                 instance="MageWorx\ShippingRateByProductAttribute\Observer\AddShippingNewToRatesCollection"
         />
     </event>
+    <!-- Take care of filtering the rates grid -->
     <event name="mageworx_suitable_rates_collection_load_before">
         <observer
                 name="mageworx_filter_rates_by_shippingnew_attribute"
                 instance="MageWorx\ShippingRateByProductAttribute\Observer\FilterRatesCollectionByShippingNewAttribute"
         />
     </event>
+    <!-- 3 event observers for the Export/Import rates with custom attribute in conditions -->
     <event name="mageworx_rates_export_collection_join_linked_tables_after">
         <observer
                 name="mageworx_join_shipping_new_table_to_export_rates_collection"

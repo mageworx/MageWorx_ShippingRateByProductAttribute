@@ -6,7 +6,6 @@
 
 namespace MageWorx\ShippingRateByProductAttribute\Setup;
 
-
 use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;

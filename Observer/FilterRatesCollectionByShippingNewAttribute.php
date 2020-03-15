@@ -58,7 +58,6 @@ class FilterRatesCollectionByShippingNewAttribute implements ObserverInterface
                        ['shippingnew']
                    );
 
-        // @TODO Check it during validation
         $collection->getSelect()->where(
             "`sn`.`shippingnew` IN (?)",
             $shippingCategories

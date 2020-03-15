@@ -6,15 +6,19 @@
 
 namespace MageWorx\ShippingRateByProductAttribute\Model\Config\Source;
 
-
 use Magento\Framework\Exception\LocalizedException;
 
+/**
+ * Class ShippingCategory
+ *
+ * Obtain options for specified product attribute
+ */
 class ShippingCategory extends \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource
 {
     /**
-     * @var \Magento\Eav\Model\Config
+     * @var \Magento\Catalog\Api\ProductAttributeRepositoryInterface
      */
-    protected $eavConfig;
+    protected $productAttributeRepository;
 
     /**
      * @var \Psr\Log\LoggerInterface
@@ -24,15 +28,15 @@ class ShippingCategory extends \Magento\Eav\Model\Entity\Attribute\Source\Abstra
     /**
      * ShippingCategory constructor.
      *
-     * @param \Magento\Eav\Model\Config $eavConfig
+     * @param \Magento\Catalog\Api\ProductAttributeRepositoryInterface $productAttributeRepository
      * @param \Psr\Log\LoggerInterface $logger
      */
     public function __construct(
-        \Magento\Eav\Model\Config $eavConfig,
+        \Magento\Catalog\Api\ProductAttributeRepositoryInterface $productAttributeRepository,
         \Psr\Log\LoggerInterface $logger
     ) {
-        $this->eavConfig = $eavConfig;
-        $this->logger = $logger;
+        $this->productAttributeRepository = $productAttributeRepository;
+        $this->logger                     = $logger;
     }
 
     /**
@@ -42,8 +46,9 @@ class ShippingCategory extends \Magento\Eav\Model\Entity\Attribute\Source\Abstra
     {
         if (empty($this->_options)) {
             try {
-                $attribute      = $this->eavConfig->getAttribute('catalog_product', 'shippingnew');
-                $this->_options = $attribute->getSource()->getAllOptions();
+                /** @var \Magento\Catalog\Api\Data\ProductAttributeInterface $attribute */
+                $attribute      = $this->productAttributeRepository->get('shippingnew');
+                $this->_options = $attribute->usesSource() ? $attribute->getSource()->getAllOptions() : [];
             } catch (LocalizedException $localizedException) {
                 $this->logger->critical($localizedException->getLogMessage());
             }
