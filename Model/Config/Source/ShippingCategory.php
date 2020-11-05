@@ -51,6 +51,8 @@ class ShippingCategory extends \Magento\Eav\Model\Entity\Attribute\Source\Abstra
                 $this->_options = $attribute->usesSource() ? $attribute->getSource()->getAllOptions() : [];
             } catch (LocalizedException $localizedException) {
                 $this->logger->critical($localizedException->getLogMessage());
+
+                return [];
             }
         }
 
