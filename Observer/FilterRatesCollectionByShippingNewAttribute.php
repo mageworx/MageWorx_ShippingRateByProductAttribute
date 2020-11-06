@@ -43,7 +43,11 @@ class FilterRatesCollectionByShippingNewAttribute implements ObserverInterface
         $items        = $request->getAllItems() ?? [];
         $shippingCategories = [];
         foreach ($items as $item) {
-            $value = $item->getProduct()->getData('shippingnew');
+            $value = $item->getProduct()->getResource()->getAttributeRawValue(
+                $item->getProduct()->getId(),
+                'shippingnew',
+                $item->getStoreId()
+            );
             if ($value !== null) {
                 $shippingCategories[] = $value;
             }
